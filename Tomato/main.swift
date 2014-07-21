@@ -2,8 +2,8 @@
 //  main.swift
 //  Tomato
 //
-//  Created by xdf on 14-7-21.
-//  Copyright (c) 2014年 xdf. All rights reserved.
+//  Created by xdf on 7/21/14.
+//  Copyright (c) 2014 xdf. All rights reserved.
 //
 
 import Cocoa
