@@ -16,3 +16,11 @@ profile
 *.moved-aside
 DerivedData
 .idea/
+# Normal
+.project
+.settings
+node_modules/
+*.swp
+*.swo
+.sw*
+logs/
