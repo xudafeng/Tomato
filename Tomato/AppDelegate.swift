@@ -37,20 +37,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         timeLabel.frame = NSRect(x: 0, y: 0, width: 100, height: 40);
         timeLabel.textColor = NSColor.redColor();
         window.contentView.addSubview(timeLabel);
-        
         NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "countDown", userInfo: nil, repeats: true);
-    }
-    
-    func applicationWillTerminate(aNotification: NSNotification?) {
-        // Insert code here to tear down your application
     }
     
     func countDown () {
         if(!run) {
             return;
         }
-        if timeLabel.string.toInt() == 0 {
+        self.window.orderOut(nil);
+        if timeLabel.string.toInt() == 50 {
             timeLabel.string = "60";
+            self.window.orderFront(nil)
         }
         else {
             let temp = timeLabel.string.toInt()! - 1;
