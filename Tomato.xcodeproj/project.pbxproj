@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6355F10D198024340089BFA4 /* tomato.png in Resources */ = {isa = PBXBuildFile; fileRef = 6355F10C198024340089BFA4 /* tomato.png */; };
 		63B5E97E197CE753004C4456 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5E97D197CE753004C4456 /* main.swift */; };
 		63B5E980197CE753004C4456 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5E97F197CE753004C4456 /* AppDelegate.swift */; };
 		63B5E982197CE753004C4456 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63B5E981197CE753004C4456 /* Images.xcassets */; };
@@ -25,6 +26,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6355F10C198024340089BFA4 /* tomato.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tomato.png; sourceTree = "<group>"; };
 		63B5E978197CE753004C4456 /* Tomato.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tomato.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63B5E97C197CE753004C4456 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63B5E97D197CE753004C4456 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 		63B5E97A197CE753004C4456 /* Tomato */ = {
 			isa = PBXGroup;
 			children = (
+				6355F10C198024340089BFA4 /* tomato.png */,
 				63B5E97F197CE753004C4456 /* AppDelegate.swift */,
 				63B5E981197CE753004C4456 /* Images.xcassets */,
 				63B5E983197CE753004C4456 /* MainMenu.xib */,
@@ -189,6 +192,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6355F10D198024340089BFA4 /* tomato.png in Resources */,
 				63B5E982197CE753004C4456 /* Images.xcassets in Resources */,
 				63B5E985197CE753004C4456 /* MainMenu.xib in Resources */,
 			);
@@ -397,6 +401,7 @@
 				63B5E996197CE753004C4456 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		63B5E997197CE753004C4456 /* Build configuration list for PBXNativeTarget "TomatoTests" */ = {
 			isa = XCConfigurationList;
@@ -405,6 +410,7 @@
 				63B5E999197CE753004C4456 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
