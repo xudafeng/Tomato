@@ -679,7 +679,7 @@
                         <rect key="frame" x="120" y="30" width="61" height="19"/>
                         <buttonCell key="cell" type="roundRect" title="Start" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="95N-kr-oP4">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="controlContent"/>
+                            <font key="font" metaFont="cellTitle"/>
                         </buttonCell>
                         <connections>
                             <action selector="buttonTapped:" target="Voe-Tx-rLC" id="ANS-fQ-Xnq"/>

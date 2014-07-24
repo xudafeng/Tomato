@@ -37,7 +37,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         timeLabel.frame = NSRect(x: 0, y: 0, width: 100, height: 40);
         timeLabel.textColor = NSColor.redColor();
         window.contentView.addSubview(timeLabel);
+        
         NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "countDown", userInfo: nil, repeats: true);
+
+        
     }
     
     func countDown () {
@@ -45,7 +48,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return;
         }
         self.window.orderOut(nil);
-        if timeLabel.string.toInt() == 50 {
+        if (timeLabel.string.toInt() == 50 ) {
             timeLabel.string = "60";
             self.window.orderFront(nil)
         }
