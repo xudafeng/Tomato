@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6343B0C6198176C80065B79A /* image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6343B0C5198176C80065B79A /* image.xcassets */; };
 		6355F10D198024340089BFA4 /* tomato.png in Resources */ = {isa = PBXBuildFile; fileRef = 6355F10C198024340089BFA4 /* tomato.png */; };
 		63B5E97E197CE753004C4456 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5E97D197CE753004C4456 /* main.swift */; };
 		63B5E980197CE753004C4456 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5E97F197CE753004C4456 /* AppDelegate.swift */; };
-		63B5E982197CE753004C4456 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63B5E981197CE753004C4456 /* Images.xcassets */; };
 		63B5E985197CE753004C4456 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63B5E983197CE753004C4456 /* MainMenu.xib */; };
 		63B5E991197CE753004C4456 /* TomatoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5E990197CE753004C4456 /* TomatoTests.swift */; };
 /* End PBXBuildFile section */
@@ -26,12 +26,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6343B0C5198176C80065B79A /* image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = image.xcassets; sourceTree = "<group>"; };
 		6355F10C198024340089BFA4 /* tomato.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tomato.png; sourceTree = "<group>"; };
 		63B5E978197CE753004C4456 /* Tomato.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tomato.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63B5E97C197CE753004C4456 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63B5E97D197CE753004C4456 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		63B5E97F197CE753004C4456 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		63B5E981197CE753004C4456 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		63B5E984197CE753004C4456 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		63B5E98A197CE753004C4456 /* TomatoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TomatoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		63B5E98F197CE753004C4456 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -59,6 +59,7 @@
 		63B5E96F197CE753004C4456 = {
 			isa = PBXGroup;
 			children = (
+				6343B0C5198176C80065B79A /* image.xcassets */,
 				63B5E97A197CE753004C4456 /* Tomato */,
 				63B5E98D197CE753004C4456 /* TomatoTests */,
 				63B5E979197CE753004C4456 /* Products */,
@@ -79,7 +80,6 @@
 			children = (
 				6355F10C198024340089BFA4 /* tomato.png */,
 				63B5E97F197CE753004C4456 /* AppDelegate.swift */,
-				63B5E981197CE753004C4456 /* Images.xcassets */,
 				63B5E983197CE753004C4456 /* MainMenu.xib */,
 				63B5E97B197CE753004C4456 /* Supporting Files */,
 			);
@@ -192,8 +192,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6343B0C6198176C80065B79A /* image.xcassets in Resources */,
 				6355F10D198024340089BFA4 /* tomato.png in Resources */,
-				63B5E982197CE753004C4456 /* Images.xcassets in Resources */,
 				63B5E985197CE753004C4456 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
