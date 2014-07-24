@@ -8,69 +8,118 @@
 
 import Cocoa;
 
+
+
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBOutlet var window: NSWindow
     @IBOutlet var myButton: NSButton
     
-    var label = NSText();
-    var backgroundImage = NSImageView()
-    var timeLabel = NSText();
-    var run = false;
-    let DEFAULT_TIME = "5";
-    func applicationDidFinishLaunching(aNotification: NSNotification?) {
-        
-        NSLog ("\nApp Start Launching ...");
-        var title: NSString;
-        title = "Pay more attention to do more.";
-        window.styleMask = 2;
-        window.alphaValue = 0.95;
-        window.hasShadow = true;
-        window.backgroundColor = NSColor.orangeColor();
-        window.setFrame(NSRect(x: 0, y: 0, width: 300, height: 200), display: true);
-        window.center();
+
+    var time = NSText();
+    var isRun = false;
+    let DEFAULT_TIME = 25 * 60;
+    
+    func setWindowView (container:NSWindow) {
+        var image = NSImageView()
+        image.frame = container.contentView.frame;
+        image.image = NSImage(named: "tomato");
+        container.contentView.addSubview(image);
+        container.styleMask = 2;
+        container.alphaValue = 0.95;
+        container.hasShadow = true;
+        container.backgroundColor = NSColor.orangeColor();
+        container.setFrame(NSRect(x: 0, y: 0, width: 300, height: 200), display: true);
+        container.center();
+    }
+    
+    func setLabelView (title:NSString) {
+        var label = NSText();
         label.alignment = .CenterTextAlignment;
         label.backgroundColor = NSColor.clearColor();
         label.textColor = NSColor.whiteColor();
         label.font = NSFont(name:"Arial",size: 14);
         label.frame = NSRect(x: 0, y: 170, width: self.window.frame.width, height: self.window.frame.height);
-        
         label.string = title;
-        window.contentView.addSubview(label);
-        backgroundImage.frame = window.contentView.frame;
-        backgroundImage.image = NSImage(named: "tomato");
-        window.contentView.addSubview(backgroundImage);
-        timeLabel.string = DEFAULT_TIME
-        timeLabel.frame = NSRect(x: 0, y: 65, width: self.window.frame.width, height: self.window.frame.height);
-        timeLabel.alignCenter(nil);
-        timeLabel.textColor = NSColor.whiteColor();
-        timeLabel.font = NSFont(name:"Arial",size: 30);
-        timeLabel.backgroundColor = NSColor.clearColor();
-        window.contentView.addSubview(timeLabel);
-        
-        NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "countDown", userInfo: nil, repeats: true);
+        self.window.contentView.addSubview(label);
     }
     
-    func countDown () {
-        if(!run) {
+    func setTimeLabelView (container:NSWindow) {
+        var time = self.time;
+        time.string = formatTime(DEFAULT_TIME);
+        time.frame = NSRect(x: 0, y: 60, width: container.frame.width, height: container.frame.height);
+        time.alignCenter(nil);
+        time.textColor = NSColor.whiteColor();
+        time.font = NSFont(name:"Arial", size: 30);
+        time.backgroundColor = NSColor.clearColor();
+        container.contentView.addSubview(time);
+    }
+    
+    func startTimer () {
+         NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "countDownLoop", userInfo: nil, repeats: true);
+    }
+    
+    func startCountDown () {
+    
+    }
+    
+    func recetCountDown () {
+        
+    }
+    
+    func formatTime (int: NSInteger)  -> NSString{
+        var minute = int/60;
+        var view = String(minute) + ":";
+        var temp = String(int - minute * 60);
+        
+        if (countElements(temp) == 1) {
+            temp = "0" + temp;
+        }
+        view += temp;
+        return  view;
+    }
+    
+    func convertTime (str: NSString) -> NSInteger{
+        let array = split("str") {
+            $0 == ":"
+        }
+        var numb = (array[0].toInt()!) * 60 + (array[1].toInt()!);
+        println(numb);
+        return numb;
+    }
+    
+    func applicationDidFinishLaunching(aNotification: NSNotification?) {
+        NSLog ("\nApp Start Launching ...");
+        setWindowView(self.window);
+        setLabelView("Pay More Attention To Do More.");
+        setTimeLabelView(self.window);
+        startTimer();
+    }
+    
+    func countDownLoop () {
+        if(!isRun) {
             return;
         }
-        self.window.orderOut(nil);
-        if (timeLabel.string.toInt() == 0 ) {
+        //self.window.orderOut(nil);
+        if (convertTime(time.string) == 0) {
             self.window.orderFront(nil);
             self.myButton.title = "start";
+            self.myButton.hidden = false;
             self.window.level = Int(CGWindowLevelForKey(Int32(kCGScreenSaverWindowLevelKey))) ;
-            run = false;
+            isRun = false;
         }
         else {
-            let temp = timeLabel.string.toInt()! - 1;
-            timeLabel.string = String(temp);
+            let temp = convertTime(time.string) - 1;
+            time.string = formatTime(temp);
         }
     }
     
     @IBAction func buttonTapped(sender: AnyObject) {
-        self.myButton.title = "stop";
-        run = true;
+        self.myButton.hidden=true
+        if(!isRun) {
+            isRun = true;
+            time.string = formatTime(DEFAULT_TIME);
+        }
     }
     
 }
