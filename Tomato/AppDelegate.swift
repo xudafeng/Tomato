@@ -15,10 +15,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet var window: NSWindow
     @IBOutlet var myButton: NSButton
     
-
     var time = NSText();
     var isRun = false;
-    let DEFAULT_TIME = 60;
+    let DEFAULT_TIME = 60 * 25;
     
     func setWindowView (container:NSWindow) {
         var image = NSImageView()
@@ -46,7 +45,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func setTimeLabelView (container:NSWindow) {
         var time = self.time;
-        time.string = String(DEFAULT_TIME);
+        time.string = formatTime2String(DEFAULT_TIME);
         time.frame = NSRect(x: 0, y: 60, width: container.frame.width, height: container.frame.height);
         time.alignCenter(nil);
         time.textColor = NSColor.whiteColor();
@@ -59,11 +58,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
          NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "countDownLoop", userInfo: nil, repeats: true);
     }
     
+    func orderOutTimer () {
+         NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "orderOutWindow", userInfo: nil, repeats: false);
+    }
+    
+    func orderOutWindow () {
+        self.window.orderOut(nil);
+    }
+    
     func formatTime2String (int: NSInteger)  -> NSString{
         var minute = int/60;
-        var view = String(minute) + ":";
-        var temp = String(int - minute * 60);
+        var sminute = String(minute);
+        if (countElements(String(minute)) == 1) {
+            sminute = "0" + sminute;
+        }
         
+        var view = sminute + ":";
+        var temp = String(int - minute * 60);
+
         if (countElements(temp) == 1) {
             temp = "0" + temp;
         }
@@ -72,8 +84,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func formatString2Time (str: NSString) -> NSInteger{
-        let myArray = str.componentsSeparatedByString(":");
-        return 60;
+        let arr = str.componentsSeparatedByString(":") as [String];
+        return arr[0].toInt()! * 60 + arr[1].toInt()!;
     }
     
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
@@ -88,20 +100,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if(!isRun) {
             return;
         }
-        //self.window.orderOut(nil);
-        //var currentString = formatString2Time(time.string);
-        //println(currentString)
-        
-        if (time.string.toInt() == 0) {
+
+        orderOutTimer();
+        if(formatString2Time(time.string) == 0) {
             self.window.orderFront(nil);
+            time.string = formatTime2String(DEFAULT_TIME);
             self.myButton.title = "start";
             self.myButton.hidden = false;
             self.window.level = Int(CGWindowLevelForKey(Int32(kCGScreenSaverWindowLevelKey))) ;
             isRun = false;
-        }
-        else {
-            let temp = time.string.toInt()! - 1;
-            time.string = String(temp);
+        } else {
+            let num = formatString2Time(time.string) - 1;
+            time.string = formatTime2String(num);
         }
     }
     
