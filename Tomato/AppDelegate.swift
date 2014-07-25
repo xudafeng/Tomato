@@ -2,12 +2,12 @@
 //  AppDelegate.swift
 //  Tomato
 //
-//  Created by xdf on 7/21/14.
+//  Created by xdf on 7/25/14.
 //  Copyright (c) 2014 xdf. All rights reserved.
 //
 
 import Cocoa;
-
+import Foundation;
 
 
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -18,7 +18,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     var time = NSText();
     var isRun = false;
-    let DEFAULT_TIME = 25 * 60;
+    let DEFAULT_TIME = 60;
     
     func setWindowView (container:NSWindow) {
         var image = NSImageView()
@@ -46,7 +46,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func setTimeLabelView (container:NSWindow) {
         var time = self.time;
-        time.string = formatTime(DEFAULT_TIME);
+        time.string = String(DEFAULT_TIME);
         time.frame = NSRect(x: 0, y: 60, width: container.frame.width, height: container.frame.height);
         time.alignCenter(nil);
         time.textColor = NSColor.whiteColor();
@@ -59,15 +59,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
          NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "countDownLoop", userInfo: nil, repeats: true);
     }
     
-    func startCountDown () {
-    
-    }
-    
-    func recetCountDown () {
-        
-    }
-    
-    func formatTime (int: NSInteger)  -> NSString{
+    func formatTime2String (int: NSInteger)  -> NSString{
         var minute = int/60;
         var view = String(minute) + ":";
         var temp = String(int - minute * 60);
@@ -76,16 +68,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             temp = "0" + temp;
         }
         view += temp;
-        return  view;
+        return  String(view);
     }
     
-    func convertTime (str: NSString) -> NSInteger{
-        let array = split("str") {
-            $0 == ":"
-        }
-        var numb = (array[0].toInt()!) * 60 + (array[1].toInt()!);
-        println(numb);
-        return numb;
+    func formatString2Time (str: NSString) -> NSInteger{
+        let myArray = str.componentsSeparatedByString(":");
+        return 60;
     }
     
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
@@ -101,7 +89,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return;
         }
         //self.window.orderOut(nil);
-        if (convertTime(time.string) == 0) {
+        //var currentString = formatString2Time(time.string);
+        //println(currentString)
+        
+        if (time.string.toInt() == 0) {
             self.window.orderFront(nil);
             self.myButton.title = "start";
             self.myButton.hidden = false;
@@ -109,19 +100,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             isRun = false;
         }
         else {
-            let temp = convertTime(time.string) - 1;
-            time.string = formatTime(temp);
+            let temp = time.string.toInt()! - 1;
+            time.string = String(temp);
         }
     }
     
     @IBAction func buttonTapped(sender: AnyObject) {
-        self.myButton.hidden=true
-        if(!isRun) {
-            isRun = true;
-            time.string = formatTime(DEFAULT_TIME);
-        }
+        self.myButton.hidden = true;
+        isRun = true;
     }
-    
 }
 
 
