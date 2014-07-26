@@ -9,15 +9,16 @@
 import Cocoa;
 import Foundation;
 
-
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBOutlet var window: NSWindow
     @IBOutlet var myButton: NSButton
     
     var time = NSText();
+    var label = NSText();
     var isRun = false;
     let DEFAULT_TIME = 60 * 25;
+    let TITLE = "Pay More Attention To Do More.";
     
     func setWindowView (container:NSWindow) {
         var image = NSImageView()
@@ -33,7 +34,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func setLabelView (title:NSString) {
-        var label = NSText();
         label.alignment = .CenterTextAlignment;
         label.backgroundColor = NSColor.clearColor();
         label.textColor = NSColor.whiteColor();
@@ -59,7 +59,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func orderOutTimer () {
-         NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "orderOutWindow", userInfo: nil, repeats: false);
+        NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "orderOutWindow", userInfo: nil, repeats: false);
     }
     
     func orderOutWindow () {
@@ -91,7 +91,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
         NSLog ("\nApp Start Launching ...");
         setWindowView(self.window);
-        setLabelView("Pay More Attention To Do More.");
+        setLabelView(TITLE);
         setTimeLabelView(self.window);
         startTimer();
     }
@@ -101,13 +101,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return;
         }
 
-        orderOutTimer();
         if(formatString2Time(time.string) == 0) {
             self.window.orderFront(nil);
             time.string = formatTime2String(DEFAULT_TIME);
             self.myButton.title = "start";
             self.myButton.hidden = false;
-            self.window.level = Int(CGWindowLevelForKey(Int32(kCGScreenSaverWindowLevelKey))) ;
+            self.label.string = TITLE;
+            self.window.level = Int(CGWindowLevelForKey(Int32(kCGScreenSaverWindowLevelKey)));
             isRun = false;
         } else {
             let num = formatString2Time(time.string) - 1;
@@ -116,8 +116,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func buttonTapped(sender: AnyObject) {
+        self.label.string = "3 seconds to prepare";
         self.myButton.hidden = true;
         isRun = true;
+        orderOutTimer();
     }
 }
 
