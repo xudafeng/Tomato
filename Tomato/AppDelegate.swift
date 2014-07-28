@@ -7,18 +7,19 @@
 //
 
 import Cocoa;
-import Foundation;
 
 class AppDelegate: NSObject, NSApplicationDelegate {
-    
+
     @IBOutlet var window: NSWindow
     @IBOutlet var myButton: NSButton
     
     var time = NSText();
     var label = NSText();
     var isRun = false;
+    var seconds = NSDate.timeIntervalSinceReferenceDate();
     let DEFAULT_TIME = 60 * 25;
     let TITLE = "Pay More Attention To Do More.";
+    
     
     func setWindowView (container:NSWindow) {
         var image = NSImageView()
@@ -83,11 +84,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return  String(view);
     }
     
-    func formatString2Time (str: NSString) -> NSInteger{
-        let arr = str.componentsSeparatedByString(":") as [String];
-        return arr[0].toInt()! * 60 + arr[1].toInt()!;
-    }
-    
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
         NSLog ("\nApp Start Launching ...");
         setWindowView(self.window);
@@ -100,8 +96,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if(!isRun) {
             return;
         }
+        let current = NSDate.timeIntervalSinceReferenceDate();
+        let passedTime = Int(round(current - seconds));
+        let showTime = DEFAULT_TIME - passedTime;
 
-        if(formatString2Time(time.string) == 0) {
+        if(showTime <= 0) {
             self.window.orderFront(nil);
             time.string = formatTime2String(DEFAULT_TIME);
             self.myButton.title = "start";
@@ -110,16 +109,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self.window.level = Int(CGWindowLevelForKey(Int32(kCGScreenSaverWindowLevelKey)));
             isRun = false;
         } else {
-            let num = formatString2Time(time.string) - 1;
-            time.string = formatTime2String(num);
+            time.string = formatTime2String(showTime);
         }
     }
-    
+
     @IBAction func buttonTapped(sender: AnyObject) {
         self.label.string = "3 seconds to prepare";
         self.myButton.hidden = true;
         isRun = true;
         orderOutTimer();
+        seconds = NSDate.timeIntervalSinceReferenceDate();
     }
 }
 
