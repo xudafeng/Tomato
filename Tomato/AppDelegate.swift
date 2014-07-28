@@ -10,8 +10,8 @@ import Cocoa;
 
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    @IBOutlet var window: NSWindow
-    @IBOutlet var myButton: NSButton
+    @IBOutlet var window: NSWindow?
+    @IBOutlet var myButton: NSButton?
     
     var time = NSText();
     var label = NSText();
@@ -23,9 +23,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func setWindowView (container:NSWindow) {
         var image = NSImageView()
-        image.frame = container.contentView.frame;
+        image.frame = container.contentView!.frame;
         image.image = NSImage(named: "tomato");
-        container.contentView.addSubview(image);
+        container.contentView!.addSubview(image);
         container.styleMask = 2;
         container.alphaValue = 0.95;
         container.hasShadow = true;
@@ -39,9 +39,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         label.backgroundColor = NSColor.clearColor();
         label.textColor = NSColor.whiteColor();
         label.font = NSFont(name:"Arial",size: 14);
-        label.frame = NSRect(x: 0, y: 170, width: self.window.frame.width, height: self.window.frame.height);
+        label.frame = NSRect(x: 0, y: 170, width: self.window!.frame.width, height: self.window!.frame.height);
         label.string = title;
-        self.window.contentView.addSubview(label);
+        self.window!.contentView!.addSubview(label);
     }
     
     func setTimeLabelView (container:NSWindow) {
@@ -52,7 +52,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         time.textColor = NSColor.whiteColor();
         time.font = NSFont(name:"Arial", size: 30);
         time.backgroundColor = NSColor.clearColor();
-        container.contentView.addSubview(time);
+        container.contentView!.addSubview(time);
     }
     
     func startTimer () {
@@ -64,7 +64,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func orderOutWindow () {
-        self.window.orderOut(nil);
+        self.window?.orderOut(nil);
     }
     
     func formatTime2String (int: NSInteger)  -> NSString{
@@ -86,9 +86,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
         NSLog ("\nApp Start Launching ...");
-        setWindowView(self.window);
+        setWindowView(self.window!);
         setLabelView(TITLE);
-        setTimeLabelView(self.window);
+        setTimeLabelView(self.window!);
         startTimer();
     }
     
@@ -101,12 +101,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let showTime = DEFAULT_TIME - passedTime;
 
         if(showTime <= 0) {
-            self.window.orderFront(nil);
+            self.window!.orderFront(nil);
             time.string = formatTime2String(DEFAULT_TIME);
-            self.myButton.title = "start";
-            self.myButton.hidden = false;
+            self.myButton?.title = "start";
+            self.myButton?.hidden = false;
             self.label.string = TITLE;
-            self.window.level = Int(CGWindowLevelForKey(Int32(kCGScreenSaverWindowLevelKey)));
+            self.window?.level = Int(CGWindowLevelForKey(Int32(kCGScreenSaverWindowLevelKey)));
             isRun = false;
         } else {
             time.string = formatTime2String(showTime);
@@ -115,7 +115,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBAction func buttonTapped(sender: AnyObject) {
         self.label.string = "3 seconds to prepare";
-        self.myButton.hidden = true;
+        self.myButton?.hidden = true;
         isRun = true;
         orderOutTimer();
         seconds = NSDate.timeIntervalSinceReferenceDate();
